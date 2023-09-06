@@ -13,8 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os, random, string, inspect
 from pathlib import Path
 from dotenv import load_dotenv
-
 import django_dyn_dt
+# import mailjet_rest
 
 load_dotenv()  # take environment variables from .env.
 
@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "home",
 
     # Tooling Dynamic_DT
@@ -63,7 +62,9 @@ INSTALLED_APPS = [
     # Tooling API-GEN
     'django_api_gen',            # Django API GENERATOR  # <-- NEW
     'rest_framework',            # Include DRF           # <-- NEW 
-    'rest_framework.authtoken',  # Include DRF Auth      # <-- NEW     
+    'rest_framework.authtoken',  # Include DRF Auth      # <-- NEW   
+    
+    "authentication",  
 ]
 
 MIDDLEWARE = [
@@ -129,7 +130,13 @@ else:
             'NAME': 'db.sqlite3',
         }
     }
-
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = False
+    EMAIL_HOST_USER = 'layfernand@gmail.com'
+    EMAIL_HOST_PASSWORD = 'Inform@tique74123!'
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -147,6 +154,10 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+AUTH_USER_MODEL = 'authentication.User'
+
+
 
 
 # Internationalization
@@ -205,3 +216,24 @@ REST_FRAMEWORK = {
     ],
 }
 ########################################
+
+# Utilisez le backend d'e-mail SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.MailjetBackend'
+
+# Hôte SMTP pour Mailjet
+EMAIL_HOST = 'in-v3.mailjet.com'
+
+# Port SMTP pour Mailjet (587 pour TLS)
+EMAIL_PORT = 587
+
+# Activer le chiffrement TLS
+EMAIL_USE_TLS = True
+
+# Nom d'utilisateur de votre compte Mailjet (API Key)
+EMAIL_HOST_USER = 'c271420fc766e2f9bf76ba649e08b642'
+
+# Mot de passe de votre compte Mailjet (API Secret)
+EMAIL_HOST_PASSWORD = '3c2d7b04ea5871619dbb6ee6c1482eb5'
+
+# Adresse e-mail à utiliser comme expéditeur
+DEFAULT_FROM_EMAIL = 'lougbegnona@gmail.com'

@@ -29,10 +29,10 @@
           <a href="{% url 'tables' %}" class="nav-link "><span class="pcoded-micon"><i
                 class="feather icon-server text-c-green"></i></span><span class="pcoded-mtext">Dynamic Tables</span></a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a target="_blank" href="/api/product/" class="nav-link "><span class="pcoded-micon"><i
                 class="feather icon-zap text-c-green"></i></span><span class="pcoded-mtext">Generated API</span></a>
-        </li>
+        </li> -->
 
         {% if not request.user.is_authenticated %}
         <li
@@ -41,8 +41,8 @@
           <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i
                 class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
           <ul class="pcoded-submenu">
-            <li class=""><a href="{% url 'login' %}" class="">Sign IN</a></li>
-            <li class=""><a href="{% url 'register' %}" class="">Sign UP</a></li>
+            <li class=""><a href="{% url 'login' %}" class="">LOGIN</a></li>
+            <li class=""><a href="{% url 'register' %}" class="">REGISTER</a></li>
           </ul>
         </li>
         {% endif %}
@@ -129,8 +129,8 @@
           <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i
                 class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
           <ul class="pcoded-submenu">
-            <li class=""><a href="{% url 'register' %}" class="" target="_blank">Sign up</a></li>
-            <li class=""><a href="{% url 'login' %}" class="" target="_blank">Sign in</a></li>
+            <li class=""><a href="{% url 'login' %}" class="">LOGIN</a></li>
+            <li class=""><a href="{% url 'register' %}" class="">REGISTER</a></li>
           </ul>
         </li>
         <li data-username="Profile Page" class="nav-item {% if 'profile' in segment %}active{% endif %}"><a href="{% url 'profile' %}" class="nav-link"><span
