@@ -34,7 +34,7 @@
                 class="feather icon-zap text-c-green"></i></span><span class="pcoded-mtext">Generated API</span></a>
         </li> -->
 
-        {% if not request.user.is_authenticated %}
+        <!-- {% if not request.user.is_authenticated %}
         <li
           data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe"
           class="nav-item pcoded-hasmenu">
@@ -45,7 +45,7 @@
             <li class=""><a href="{% url 'register' %}" class="">REGISTER</a></li>
           </ul>
         </li>
-        {% endif %}
+        {% endif %} -->
 
         {% admin_get_menu as app_list %}
         {% if app_list %}

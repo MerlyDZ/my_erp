@@ -112,7 +112,7 @@ class SignUpForm(UserCreationForm):
         ))
     class Meta:
         model = get_user_model()
-        fields = ('username', 'last_name', 'first_name', 'sex', 'age', 'email', 'date_of_birth', 'place_of_birth', 'nationality', 'contacts')
+        fields = ('username', 'last_name', 'first_name', 'sex', 'email')
         
     
 class ChangeUsernameForm(forms.Form):

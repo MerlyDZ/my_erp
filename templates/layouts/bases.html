@@ -17,24 +17,24 @@
     {% include 'includes/pre-loader.html' %}
   {% endblock pre_loader %}
   
-  <!-- {% block sidebar %}
+  {% block sidebar %}
     {% include 'includes/sidebar.html' %}
-  {% endblock sidebar %} -->
+  {% endblock sidebar %}
 
-  <!-- {% block header %}
+  {% block header %}
     {% include 'includes/navigation.html' %}
-  {% endblock header %} -->
+  {% endblock header %}
 
   <!-- [ Main Content ] start -->
-  <div class="pcoded-main-container"> 
+  <div class="pcoded-main-container">
     <div class="pcoded-wrapper">
-       <div class="pcoded-content"> 
-         <div class="pcoded-inner-content">
+      <div class="pcoded-content">
+        <div class="pcoded-inner-content">
           <!-- [ breadcrumb ] start -->
           {% block breadcrumbs %}
             {% include 'includes/breadcrumb.html' %}
           {% endblock breadcrumbs %}
-          <!-- [ breadcrumb ] end  -->
+          <!-- [ breadcrumb ] end -->
           <div class="main-body">
             <div class="page-wrapper">
               {% block content %}{% endblock content %}
