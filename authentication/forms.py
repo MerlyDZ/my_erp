@@ -6,7 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 from django import forms
 from django.contrib.auth.forms import PasswordResetForm,PasswordChangeForm,UserCreationForm
 from django.contrib.auth import get_user_model
-
+from .models import User
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -49,7 +49,8 @@ class SignUpForm(UserCreationForm):
         ))
     
     sex = forms.ChoiceField(
-        widget=forms.TextInput(
+        choices=User.SEX_CHOICES, 
+        widget=forms.Select(  
             attrs={
                 "placeholder": "Sexe",
                 "class": "form-control" 

@@ -18,13 +18,8 @@ class User(AbstractUser):
     ]
     
     sex = models.CharField(max_length=1, choices=SEX_CHOICES,)
-    age = models.PositiveIntegerField()
     email = models.EmailField(unique=True,null= True)
-    date_of_birth = models.DateField(null=True, blank=True)
-    place_of_birth = models.CharField(max_length=50)     
-    residence = models.CharField(max_length=50)
-    nationality = models.CharField(max_length=50)
-    contacts = models.CharField(max_length=50)
+    
 
     class Meta:
         verbose_name = "User"
