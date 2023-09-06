@@ -47,13 +47,7 @@ class SignUpForm(UserCreationForm):
                 "class": "form-control"
             }
         ))
-    age = forms.IntegerField(
-        widget=forms.NumberInput(
-            attrs={
-                "placeholder": "Age",
-                "class": "form-control"
-            }
-        ))
+    
     sex = forms.ChoiceField(
         widget=forms.TextInput(
             attrs={
@@ -68,34 +62,7 @@ class SignUpForm(UserCreationForm):
                 "class": "form-control"
             }
         ))
-    date_of_birth = forms.DateField(
-        widget=forms.DateInput(
-            attrs={
-                "placeholder": "Date de naissance",
-                "class": "form-control"
-            }
-        ))
-    place_of_birth = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Lieu de naissance",
-                "class": "form-control"
-            }
-        ))
-    nationality = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Nationalité",
-                "class": "form-control"
-            }
-        ))
-    contacts = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Contacts",
-                "class": "form-control"
-            }
-        ))
+    
     password1 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
