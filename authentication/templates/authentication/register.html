@@ -10,7 +10,7 @@
             <div class="container">
                 <div class="row justify-content-center form-bg-image" data-background-lg="/static/assets/img/illustrations/signin.svg">
                     <div class="col-12 d-flex align-items-center justify-content-center">
-                        <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-50 w-100 fmxw-500">
+                        <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-50 w-10 fmxw-500">
                             <div class="text-center text-md-center mb-4 mt-md-0">
                                 <h1 class="mb-0 h3">
                                     Inscription
@@ -19,17 +19,6 @@
                             <form method="post" action="" class="mt-4">
                                 {% csrf_token %}
                                 <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <label for="username">Nom d'utilisateur</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <span class="fas fa-user-circle"></span>
-                                            </span>
-                                            {{ form.username }}
-                                        </div>  
-                                        <span class="text-error">{{ form.username.errors }}</span>
-                                    </div>
-
                                     <div class="col-md-6 mb-2">
                                         <label for="last_name">Nom</label>
                                         <div class="input-group">
@@ -40,9 +29,7 @@
                                         </div>  
                                         <span class="text-error">{{ form.last_name.errors }}</span>
                                     </div>
-                                </div>
 
-                                <div class="row">
                                     <div class="col-md-6 mb-2">
                                         <label for="first_name">Prénoms</label>
                                         <div class="input-group">
@@ -53,7 +40,9 @@
                                         </div>  
                                         <span class="text-error">{{ form.first_name.errors }}</span>
                                     </div>
-
+                                </div>
+                                                            
+                                <div class="row">
                                     <div class="col-md-6 mb-2">
                                         <label for="sex">Sexe</label>
                                         <div class="input-group">
@@ -64,53 +53,58 @@
                                         </div>  
                                         <span class="text-error">{{ form.sex.errors }}</span>
                                     </div>
+    
+                                    <div class="col-md-6 mb-2">
+                                        <label for="email">Adresse mail</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <span class="fas fa-envelope"></span>
+                                            </span>
+                                            {{ form.email }}
+                                        </div>  
+                                        <span class="text-error">{{ form.email.errors }}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">                                
+                                    <div class="col-md-6 mb-2">
+                                        <label for="password">Mot de passe</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <span class="fas fa-unlock-alt"></span>
+                                            </span>
+                                            {{ form.password1 }}
+                                        </div>  
+                                        <span class="text-error">{{ form.password1.errors }}</span>
+                                    </div>
+
+                                    <div class="col-md-6 mb-2">
+                                        <label for="password">Confirme Mot de passe</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <span class="fas fa-unlock-alt"></span>
+                                            </span>
+                                            {{ form.password2 }}
+                                        </div>  
+                                        <span class="text-error">{{ form.password2.errors }}</span>
+                                    </div>
                                 </div>
 
 
-                                <div class="form-group mb-2">
-                                    <label for="email">Adresse mail</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <span class="fas fa-envelope"></span>
-                                        </span>
-                                        {{ form.email }}
-                                    </div>  
-                                    <span class="text-error">{{ form.email.errors }}</span>
-                                </div>
-                                 
-                                <div class="form-group mb-2">
-                                    <label for="password">Mot de passe</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon2">
-                                            <span class="fas fa-unlock-alt"></span>
-                                        </span>
-                                        {{ form.password1 }}
-                                    </div>  
-                                    <span class="text-error">{{ form.password1.errors }}</span>
-                                </div>
-
-                                <div class="form-group mb-2">
-                                    <label for="password">Confirme Mot de passe</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon2">
-                                            <span class="fas fa-unlock-alt"></span>
-                                        </span>
-                                        {{ form.password2 }}
-                                    </div>  
-                                    <span class="text-error">{{ form.password2.errors }}</span>
-                                </div>
-
-                                <div class="mb-2">
+                                <!-- <div class="mb-2">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="remember">
                                         <label class="form-check-label fw-normal mb-0" for="remember">
                                            J'accepte tout les <a href="#" class="fw-bold">termes and conditions</a>
                                         </label>
                                     </div>
-                                </div>
+                                </div> -->
+                                <br>
 
-                                <div class="d-grid">
-                                    <button type="submit" name="register" class="btn btn-gray-800">S'inscrire</button>
+                                <div class="text-center">
+                                    <div class="d-grid" >
+                                        <button type="submit" name="register" class="btn btn-primary">S'inscrire</button>
+                                    </div>
                                 </div>
 
                                 <div class="d-flex justify-content-center align-items-center mt-4">

@@ -41,12 +41,17 @@ def login_view(request):
             msg = 'Error validating the form'
     return render(request, "authentication/login.html", {"form": form, "msg": msg})
 
+def generate_username(sender, instance, created, **kwargs):
+    if created:
+        username = "@" + instance.first_name
+        instance.user.username = username
+        instance.user.save()
+
 
 def register_user(request):
     form = SignUpForm(request.POST or None)
     if request.method=='POST':
         if form.is_valid():
-            username = request.POST.get('username')
             email = request.POST.get('email')
             password = request.POST.get('password')
             user = form.save(commit=False)
@@ -57,24 +62,24 @@ def register_user(request):
             token = default_token_generator.make_token(user)
             activation_link = f"{request.scheme}://{request.get_host()}/activate/{uid}/{token}/"
 
-            api_key ='c271420fc766e2f9bf76ba649e08b642'
-            api_secret ='3c2d7b04ea5871619dbb6ee6c1482eb5'
+            api_key ='fa73af392f44a0c0cc435ae1a9085b16'
+            api_secret ='c5ab2d6c3828468b6e3f233a65e2f5a0'
 
             mailjet = Client(auth=(api_key, api_secret))
             data = {
-	            'FromEmail': 'lougbegnona@gmail.com',
-	            'FromName': 'Django DJ',
+	            'FromEmail': 'funmyteam@gmail.com',
+	            'FromName': 'team',
 	            'Subject': 'Activate your account',
                 'Text-part': 'Bienvenu sur votre page d\activation',
-                'Html-part': f'Veuillez cliquer sur le lien <a href="{activation_link}">Activate my account</a> pour activer votre compte.',
+                'Html-part': f'Veuillez cliquer sur le lien <a href="{activation_link}">Activate account</a> pour activer votre compte.',
                 'Recipients': [{'Email':user.email}]
             }
             try:
                 response = mailjet.send.create(data=data)
                 if response.status_code == 200:
+                    print(response.status_code)
                     return redirect('login')
                 else:
-                    print(response.status_code)
                     print("Erreur lors de l'envoi de l'e-mail de confirmation :", response.content)
                     form.add_error(None, "Désolé, une erreur s'est produite lors de l'envoi de l'e-mail de confirmation. Veuillez réessayer plus tard.")
             except Exception as e:
@@ -200,14 +205,14 @@ def reset_password(request):
             reset_password_url = reverse('reset_password_confirm', kwargs={'uidb64': user.pk, 'token': token})
             reset_password_url = request.build_absolute_uri(reset_password_url)
 
-            api_key ='c271420fc766e2f9bf76ba649e08b642'
-            api_secret ='3c2d7b04ea5871619dbb6ee6c1482eb5'
+            api_key ='fa73af392f44a0c0cc435ae1a9085b16'
+            api_secret ='c5ab2d6c3828468b6e3f233a65e2f5a0'
 
             print(reset_password_url)
             mailjet = Client(auth=(api_key, api_secret))
             data = {
-                'FromEmail': 'lougbegnona@gmail.com',
-                'FromName': 'Django DJ',
+                'FromEmail': 'funmyteam@gmail.com',
+                'FromName': 'team',
                 'Subject': 'Réinitiliser votre mot de passe',
                 'Text-part': 'Bienvenu sur la page de réinitialisation',
                 'Html-part': f'Veuillez cliquer sur le lien suivant :<a href="{reset_password_url}">REINITIALISER</a> pour continuer.',

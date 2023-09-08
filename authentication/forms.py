@@ -26,13 +26,7 @@ class LoginForm(forms.Form):
 
 
 class SignUpForm(UserCreationForm):
-    username = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Username",
-                "class": "form-control"
-            }
-        ))
+   
     last_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -67,20 +61,20 @@ class SignUpForm(UserCreationForm):
     password1 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                "placeholder": "Password",
+                "placeholder": "Mot de passe",
                 "class": "form-control"
             }
         ))
     password2 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                "placeholder": "Password confirm",
+                "placeholder": "Confirmer mot de passe",
                 "class": "form-control"
             }
         ))
     class Meta:
         model = get_user_model()
-        fields = ('username', 'last_name', 'first_name', 'sex', 'email')
+        fields = ('last_name', 'first_name', 'sex', 'email')
         
     
 class ChangeUsernameForm(forms.Form):

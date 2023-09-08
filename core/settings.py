@@ -63,8 +63,7 @@ INSTALLED_APPS = [
     'django_api_gen',            # Django API GENERATOR  # <-- NEW
     'rest_framework',            # Include DRF           # <-- NEW 
     'rest_framework.authtoken',  # Include DRF Auth      # <-- NEW   
-    
-    "authentication",  
+    'authentication',  
 ]
 
 MIDDLEWARE = [
@@ -135,8 +134,8 @@ else:
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = False
-    EMAIL_HOST_USER = 'layfernand@gmail.com'
-    EMAIL_HOST_PASSWORD = 'Inform@tique74123!'
+    EMAIL_HOST_USER = 'funmyteam@gmail.com'
+    EMAIL_HOST_PASSWORD = 'iamFunmy@08'
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -165,7 +164,7 @@ AUTH_USER_MODEL = 'authentication.User'
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "UTC"'/'
 
 USE_I18N = True
 
@@ -192,6 +191,9 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+# name = 'authentication'
+# def ready(self):
+#     import authentication.signals
 
 LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -230,10 +232,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Nom d'utilisateur de votre compte Mailjet (API Key)
-EMAIL_HOST_USER = 'c271420fc766e2f9bf76ba649e08b642'
+EMAIL_HOST_USER = 'fa73af392f44a0c0cc435ae1a9085b16'
 
 # Mot de passe de votre compte Mailjet (API Secret)
-EMAIL_HOST_PASSWORD = '3c2d7b04ea5871619dbb6ee6c1482eb5'
+EMAIL_HOST_PASSWORD = 'c5ab2d6c3828468b6e3f233a65e2f5a0'
 
 # Adresse e-mail à utiliser comme expéditeur
-DEFAULT_FROM_EMAIL = 'lougbegnona@gmail.com'
+DEFAULT_FROM_EMAIL = 'funmyteam@gmail.com'

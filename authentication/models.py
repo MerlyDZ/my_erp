@@ -12,9 +12,9 @@ from django.contrib.auth.models import User
 
 class User(AbstractUser):
     SEX_CHOICES = [
-        ('M', 'Male'),
-        ('F', 'Female'),
-        ('O', 'Other'),
+        ('M', 'Masculin'),
+        ('F', 'Féminin'),
+        ('O', 'Non-binaire'),
     ]
     
     sex = models.CharField(max_length=1, choices=SEX_CHOICES,)
