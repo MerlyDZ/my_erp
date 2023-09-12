@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %}
+{% extends 'authentication/layouts/base.html' %}
 {% load static %}
 
 {% block breadcrumbs %}{% endblock breadcrumbs %}
@@ -19,7 +19,7 @@
                                 <br>
                             <p>Désolé, le lien d'activation est invalide ou a expiré. Veuillez réessayer.</p>
                             <br>
-                            <a href="{% url 'reset_password' %}"><button type="submit" name="reset" class="btn btn-gray-800">Réessayer</button></a>
+                            <a href="{% url 'reset_password' %}"><button type="submit" name="reset" class="btn btn-primary">Réessayer</button></a>
                         </div>
                     </div>
                 </div>

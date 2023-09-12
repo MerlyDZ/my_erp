@@ -13,13 +13,13 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import get_user_model
 from mailjet_rest import Client
 from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.contrib.auth.models import User
-from .forms import ChangeUsernameForm, ChangeEmailForm, PasswordChangeForm, PasswordResetForm,  LoginForm, SignUpForm
+from .models import User
+from .forms import ChangeUsernameForm, ChangeEmailForm, PasswordChangeForm, PasswordResetForm,  LoginForm, SignUpForm, EntrepriseForm
 from django.contrib.auth import logout as auth_logout
 
 user = get_user_model()
@@ -34,26 +34,18 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                return redirect("dashboard")
             else:
                 msg = 'Invalid credentials'
         else:
             msg = 'Error validating the form'
     return render(request, "authentication/login.html", {"form": form, "msg": msg})
 
-def generate_username(sender, instance, created, **kwargs):
-    if created:
-        username = "@" + instance.first_name
-        instance.user.username = username
-        instance.user.save()
-
 
 def register_user(request):
     form = SignUpForm(request.POST or None)
     if request.method=='POST':
         if form.is_valid():
-            email = request.POST.get('email')
-            password = request.POST.get('password')
             user = form.save(commit=False)
             user.is_active = False  
             user.save()
@@ -87,8 +79,10 @@ def register_user(request):
                 form.add_error(None, "Désolé, une erreur s'est produite lors de l'envoi de l'e-mail de confirmation. Veuillez réessayer plus tard.")
         else:
             print(form.errors)
-
-    return render(request, 'authentication/register.html', {'form': form})
+    context = {
+        "form": form      
+        }
+    return render(request, 'authentication/register.html', context)
 
 
 @login_required
@@ -99,16 +93,10 @@ def display_profile(request):
     context = {
 
     }
-    return render(request, 'authentication/new_profil.html', context)
+    return render(request, 'authentication/profil.html', context)
 
 
 @login_required
-def profil(request):
-    username = request.POST.get('username')
-    email = request.POST.get('email')
-    password = request.POST.get('password')
-    return render(request, 'authentication/profil.html')
-
 def change_password(request):
     form = PasswordChangeForm(request.user)
     if request.method == 'POST':
@@ -171,18 +159,18 @@ def change_username(request):
 
 
 def activate_account(request, uidb64, token):
-    try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-        if default_token_generator.check_token(user, token):
-            user.is_active = True
-            user.save()
-            return redirect('activation_success')
-        else:
-            return redirect('activation_failed')
-    except User.DoesNotExist:
-        return render(request, 'authentication/activation_failed.html')
 
+    uid = force_str(urlsafe_base64_decode(uidb64))
+    user = get_object_or_404(User, pk=uid)
+    print(default_token_generator.check_token(user, token))
+    if default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+
+        return redirect('activation_success')
+    else:
+        return redirect('activation_failed')
+   
 
 def activation_success(request):
     return render(request, 'authentication/activation_success.html')
@@ -281,3 +269,71 @@ def logout(request):
     return response
    
 
+@login_required
+def dashboard(request):
+    context = {
+
+    }
+    return render(request, "authentication/index.html", context)
+
+@login_required
+def creer_entreprise(request):
+    form = EntrepriseForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            # user = form.save(commit=False)
+            # user.is_active = False  
+            user.save()
+            return redirect('index1')
+
+            # uid = urlsafe_base64_encode(force_bytes(user.pk))
+            # token = default_token_generator.make_token(user)
+            # confirmation_link = f"{request.scheme}://{request.get_host()}/confirm/{uid}/{token}/"
+
+            # api_key ='fa73af392f44a0c0cc435ae1a9085b16'
+            # api_secret ='c5ab2d6c3828468b6e3f233a65e2f5a0'
+
+            # mailjet = Client(auth=(api_key, api_secret))
+            # data = {
+	        #     'FromEmail': 'funmyteam@gmail.com',
+	        #     'FromName': 'team',
+	        #     'Subject': 'Confirm_entreprise',
+            #     'Text-part': 'Bienvenu sur votre page de confirmation',
+            #     'Html-part': f'Veuillez cliquer sur le lien <a href="{confirmation_link}">Confirm_entreprise</a> pour confirmer votre entreprise.',
+            #     'Recipients': [{'Email':user.email}]
+            # }
+            # try:
+            #     response = mailjet.send.create(data=data)
+            #     if response.status_code == 200:
+            #         print(response.status_code)
+            #         return redirect('index1')
+            #     else:
+            #         print("Erreur lors de l'envoi de l'e-mail de confirmation :", response.content)
+            #         form.add_error(None, "Désolé, une erreur s'est produite lors de l'envoi de l'e-mail de confirmation. Veuillez réessayer plus tard.")
+            # except Exception as e:
+            #     print("Erreur lors de l'envoi de l'e-mail de confirmation :",str(e))
+            #     form.add_error(None, "Désolé, une erreur s'est produite lors de l'envoi de l'e-mail de confirmation. Veuillez réessayer plus tard.")
+        else:
+            form = EntrepriseForm()
+    context = {
+        "form": form      
+        }
+    return render(request, "authentication/creer_entreprise.html", context)
+    
+# def confirm_entreprise(request):
+#     uid = force_str(urlsafe_base64_decode(uidb64))
+#     user = get_object_or_404(User, pk=uid)
+#     print(default_token_generator.check_token(user, token))
+#     if default_token_generator.check_token(user, token):
+#         user.is_active = True
+#         user.save()
+
+#         return redirect('activation_success')
+#     else:
+#         return render(request, "authentication/")
+
+def dashboard_admin(request):
+    context = {
+
+    }
+    return render(request, "authentication/index1.html", context)

@@ -17,10 +17,17 @@ urlpatterns = [
     path('change_username/', change_username, name="change_username"),
     path('change_email/', change_email, name='change_email'),
     path('logout/', logout, name="logout"),
-    path('activate/<str:uidb64>/<str:token>/', activate_account, name='activate_account'),
+    path('activate/<uidb64>/<token>/', activate_account, name='activate_account'),
     path('activation_success/', activation_success, name='activation_success'),
     path('activation_failed/', activation_failed, name='activation_failed'),
-    
+
+    path('dashboard/', dashboard, name = "dashboard"),
+    path('creer_entreprise/', creer_entreprise, name = "creer_entreprise"),
+    path('dashboard_admin/', dashboard_admin, name = "dashboard_admin"),
+
+    # path('confirm/<uidb64>/<token>/', confirm_entreprise, name='confirm_entreprise'),
+
+
     path('reset_failed/', reset_failed, name='reset_failed'),
     path('reset_complete/',reset_password_complete, name='reset_complete'),
     path('reset_password/', reset_password, name='reset_password'),

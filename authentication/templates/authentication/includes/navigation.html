@@ -21,8 +21,6 @@
         <a class="dropdown-toggle" href="javascript:" data-toggle="dropdown">Dropdown</a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="javascript:">Action</a></li>
-          <li><a class="dropdown-item" href="javascript:">Another action</a></li>
-          <li><a class="dropdown-item" href="javascript:">Something else here</a></li>
         </ul>
       </li>
       <li class="nav-item">
@@ -110,7 +108,7 @@
           <div class="dropdown-menu dropdown-menu-right profile-notification">
             <div class="pro-head">
               <img src="{% static 'assets/images/user/avatar-1.jpg' %}" class="img-radius" alt="User-Profile-Image">
-              <span>John Doe</span>
+              <span>{{ request.user.first_name }} &nbsp;{{ request.user.last_name }}</span>
               {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
                 <a href="{% url 'admin:logout' %}" class="dud-logout" title="Logout">
@@ -122,24 +120,14 @@
               {% endif %}
             </div>
             <ul class="pro-body">
-              <!-- <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i>
-                  Settings</a></li> -->
-              <li><a href="{% url 'profile' %}" class="dropdown-item"><i class="feather icon-user"></i>
-                  Profil</a></li>
+             
+              <li><a href="{% url 'display_profile' %}" class="dropdown-item"><i class="feather icon-user"></i>
+                  Mon profil</a></li>
               <li><a href="#" class="dropdown-item"><i class="feather icon-mail"></i>
                   Messages</a></li>
-              <!-- <li><a href="#" class="dropdown-item"><i class="feather icon-lock"></i> Lock
-                  Screen</a></li> -->
+             
               {% if request.user.is_authenticated %}
-              <li>
-                {% if request.user.is_superuser %}
-                <a href="{% url 'admin:password_change' %}" class="dropdown-item">
-                {% else %}
-                <a href="{% url 'password_change' %}" class="dropdown-item">
-                {% endif %}
-                  <i class="feather icon-edit"></i>Change Password
-                </a>
-              </li>
+              
               {% endif %}
             </ul>
           </div>

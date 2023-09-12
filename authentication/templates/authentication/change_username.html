@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %}
+{% extends 'authentication/layouts/base.html' %}
 {% load static %}
 
 {% block breadcrumbs %}{% endblock breadcrumbs %}
@@ -12,17 +12,17 @@
             </p> -->
             <div class="row justify-content-center form-bg-image" data-background-lg="/static/assets/img/illustrations/signin.svg">
                 <div class="col-12 d-flex align-items-center justify-content-center">
-                    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-10 fmxw-500">
                         <div class="text-center text-md-center mb-4 mt-md-0">
                             <h1 class="mb-0 h3">
-                                Modification du username
+                                Modification du nom d'utilisateur
                             <form method="post">
                                 <br>
                                 {% csrf_token %}
                                 {{ form.as_p }}
                                 <br>
                                 <div class="d-grid">
-                                    <button type="submit" name="" class="btn btn-gray-800">Changer le username</button>
+                                    <button type="submit" name="" class="btn btn-primary">Changer le nom d'utilisateur</button>
                                 </div>
                             </form>
                         </div>
